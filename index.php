@@ -12,6 +12,6 @@ $message = "Bonjour le monde !";
 </head>
 <body>
     <h1><?php echo htmlspecialchars($message, ENT_QUOTES, 'UTF-8'); ?></h1>
-    <p>Fichier : <strong>index.php</strong></p>
+    <p>Fichier concernee : <strong>index.php</strong></p>
 </body>
 </html>
