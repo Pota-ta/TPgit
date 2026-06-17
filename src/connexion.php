@@ -1,1 +1,1 @@
-//connexion simple à la base de données
+//connexion simple à extrème la base de données non pdo
