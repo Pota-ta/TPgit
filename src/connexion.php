@@ -1,0 +1,1 @@
+//connexion simple à extrème la base de données non pdo
