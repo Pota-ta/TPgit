@@ -60,24 +60,40 @@ $employe = getEmployeById($emp_no);
 $page_title = 'Devenir Manager';
 include __DIR__ . '/header.php';
 ?>
-    <h1>Devenir Manager - <?= htmlspecialchars($employe['first_name'] . ' ' . $employe['last_name']) ?></h1>
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h1 class="h2">Devenir Manager - <?= htmlspecialchars($employe['first_name'] . ' ' . $employe['last_name']) ?></h1>
+            <p class="text-muted">Choisissez le département et la date de début.</p>
+        </div>
+        <a href="employee.php?emp_no=<?= intval($emp_no) ?>" class="btn btn-secondary">Retour</a>
+    </div>
     <?php if (!empty($error)): ?>
-        <p style="color:red;"><?= htmlspecialchars($error) ?></p>
+        <div class="alert alert-danger"><?= htmlspecialchars($error) ?></div>
     <?php endif; ?>
-    <form method="post">
+    <form method="post" class="row g-3">
         <input type="hidden" name="emp_no" value="<?= intval($emp_no) ?>">
-        <p>Choisir département:
-            <select name="dept_no" onchange="this.form.submit()">
+        <div class="col-md-6">
+            <label class="form-label">Département</label>
+            <select class="form-select" name="dept_no" onchange="this.form.submit()">
                 <?php foreach ($departments as $d): ?>
                     <option value="<?= htmlspecialchars($d['dept_no']) ?>" <?= ($selected_dept == $d['dept_no']) ? 'selected' : '' ?>><?= htmlspecialchars($d['dept_no']) ?> - <?= htmlspecialchars($d['dept_name']) ?></option>
                 <?php endforeach; ?>
             </select>
-        </p>
-        <?php if ($selected_dept): ?>
-            <?php $mgr = getCurrentManagerByDepartment($selected_dept); ?>
-            <p>Manager actuel: <strong><?= $mgr ? htmlspecialchars($mgr['first_name'] . ' ' . $mgr['last_name']) : 'N/A' ?></strong></p>
-        <?php endif; ?>
-        <p>Date de début: <input type="date" name="start_date" required></p>
-        <p><button type="submit">Promouvoir</button> <a href="employee.php?emp_no=<?= intval($emp_no) ?>">Annuler</a></p>
+        </div>
+        <div class="col-md-6">
+            <?php if ($selected_dept): ?>
+                <?php $mgr = getCurrentManagerByDepartment($selected_dept); ?>
+                <label class="form-label">Manager actuel</label>
+                <div class="form-control bg-white"><?= $mgr ? htmlspecialchars($mgr['first_name'] . ' ' . $mgr['last_name']) : 'N/A' ?></div>
+            <?php endif; ?>
+        </div>
+        <div class="col-md-6">
+            <label class="form-label">Date de début</label>
+            <input class="form-control" type="date" name="start_date" required>
+        </div>
+        <div class="col-12">
+            <button class="btn btn-success" type="submit">Promouvoir</button>
+            <a class="btn btn-outline-secondary" href="employee.php?emp_no=<?= intval($emp_no) ?>">Annuler</a>
+        </div>
     </form>
 <?php include __DIR__ . '/footer.php';

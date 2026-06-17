@@ -10,11 +10,31 @@ $employe = getEmployeById($emp_no);
 $page_title = 'Titres de ' . ($employe['first_name'] ?? '');
 include __DIR__ . '/header.php';
 ?>
-    <h1>Titres de <?= htmlspecialchars($employe['first_name'] . ' ' . $employe['last_name']) ?></h1>
-    <ul>
-        <?php foreach ($titles as $t): ?>
-            <li><?= htmlspecialchars($t['title']) ?> (<?= htmlspecialchars($t['from_date']) ?> → <?= htmlspecialchars($t['to_date']) ?>)</li>
-        <?php endforeach; ?>
-    </ul>
-    <p><a href="employee.php?emp_no=<?= urlencode($emp_no) ?>">Retour</a></p>
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h1 class="h2">Titres de <?= htmlspecialchars($employe['first_name'] . ' ' . $employe['last_name']) ?></h1>
+            <p class="text-muted">Historique des postes occupés.</p>
+        </div>
+        <a href="employee.php?emp_no=<?= urlencode($emp_no) ?>" class="btn btn-secondary">Retour</a>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-striped table-hover align-middle">
+            <thead class="table-light">
+                <tr>
+                    <th>Titre</th>
+                    <th>Début</th>
+                    <th>Fin</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($titles as $t): ?>
+                    <tr>
+                        <td><?= htmlspecialchars($t['title']) ?></td>
+                        <td><?= htmlspecialchars($t['from_date']) ?></td>
+                        <td><?= htmlspecialchars($t['to_date']) ?></td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
 <?php include __DIR__ . '/footer.php';

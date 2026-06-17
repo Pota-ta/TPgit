@@ -1,19 +1,15 @@
 <?php
-// Page d'accueil simple
+$page_title = 'Base Employees';
+include __DIR__ . '/header.php';
 ?>
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <title>Base Employees</title>
-</head>
-<body>
-    <h1>TP Employees</h1>
-    <ul>
-        <li><a href="departments.php">Liste des départements</a></li>
-        <li><a href="employees.php?dept_no=d001">Exemple : employés du département d001</a></li>
-        <li><a href="employee.php?emp_no=10001">Exemple : fiche employé 10001</a></li>
-        <li><a href="job_stats.php">Statistiques par emploi</a></li>
-    </ul>
-</body>
-</html>
+    <div class="bg-light p-5 rounded-3">
+        <h1 class="display-6">TP Employees</h1>
+        <p class="lead">Application simple sur la base de données employees.</p>
+        <div class="list-group">
+            <a href="departments.php" class="list-group-item list-group-item-action">Liste des départements</a>
+            <a href="employees.php?dept_no=d001" class="list-group-item list-group-item-action">Exemple : employés du département d001</a>
+            <a href="employee.php?emp_no=10001" class="list-group-item list-group-item-action">Exemple : fiche employé 10001</a>
+            <a href="job_stats.php" class="list-group-item list-group-item-action">Statistiques par emploi</a>
+        </div>
+    </div>
+<?php include __DIR__ . '/footer.php';

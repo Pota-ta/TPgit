@@ -52,22 +52,39 @@ $employe = getEmployeById($emp_no);
 $page_title = 'Changer de département';
 include __DIR__ . '/header.php';
 ?>
-    <h1>Changer de département - <?= htmlspecialchars($employe['first_name'] . ' ' . $employe['last_name']) ?></h1>
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h1 class="h2">Changer de département - <?= htmlspecialchars($employe['first_name'] . ' ' . $employe['last_name']) ?></h1>
+            <p class="text-muted">Sélectionnez un nouveau département et une date de début.</p>
+        </div>
+        <a href="employee.php?emp_no=<?= intval($emp_no) ?>" class="btn btn-secondary">Retour</a>
+    </div>
     <?php if (!empty($error)): ?>
-        <p style="color:red;"><?= htmlspecialchars($error) ?></p>
+        <div class="alert alert-danger"><?= htmlspecialchars($error) ?></div>
     <?php endif; ?>
-    <form method="post">
+    <form method="post" class="row g-3">
         <input type="hidden" name="emp_no" value="<?= intval($emp_no) ?>">
-        <p>Département actuel : <strong><?= htmlspecialchars($current['dept_no'] ?? 'N/A') ?></strong> (depuis <?= htmlspecialchars($current['from_date'] ?? '') ?>)</p>
-        <p>Nouveau département:
-            <select name="new_dept">
+        <div class="col-12">
+            <div class="alert alert-info">
+                Département actuel : <strong><?= htmlspecialchars($current['dept_no'] ?? 'N/A') ?></strong> (depuis <?= htmlspecialchars($current['from_date'] ?? '') ?>)
+            </div>
+        </div>
+        <div class="col-md-6">
+            <label class="form-label">Nouveau département</label>
+            <select class="form-select" name="new_dept" required>
                 <?php foreach ($departments as $d): ?>
                     <?php if ($d['dept_no'] === ($current['dept_no'] ?? '')) continue; ?>
                     <option value="<?= htmlspecialchars($d['dept_no']) ?>"><?= htmlspecialchars($d['dept_no']) ?> - <?= htmlspecialchars($d['dept_name']) ?></option>
                 <?php endforeach; ?>
             </select>
-        </p>
-        <p>Date de début: <input type="date" name="from_date" required></p>
-        <p><button type="submit">Valider</button> <a href="employee.php?emp_no=<?= intval($emp_no) ?>">Annuler</a></p>
+        </div>
+        <div class="col-md-6">
+            <label class="form-label">Date de début</label>
+            <input class="form-control" type="date" name="from_date" required>
+        </div>
+        <div class="col-12">
+            <button class="btn btn-primary" type="submit">Valider</button>
+            <a class="btn btn-outline-secondary" href="employee.php?emp_no=<?= intval($emp_no) ?>">Annuler</a>
+        </div>
     </form>
 <?php include __DIR__ . '/footer.php';

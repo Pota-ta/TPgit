@@ -10,11 +10,31 @@ $employe = getEmployeById($emp_no);
 $page_title = 'Salaires de ' . ($employe['first_name'] ?? '');
 include __DIR__ . '/header.php';
 ?>
-    <h1>Salaires de <?= htmlspecialchars($employe['first_name'] . ' ' . $employe['last_name']) ?></h1>
-    <ul>
-        <?php foreach ($salaries as $s): ?>
-            <li><?= htmlspecialchars($s['salary']) ?> (<?= htmlspecialchars($s['from_date']) ?> → <?= htmlspecialchars($s['to_date']) ?>)</li>
-        <?php endforeach; ?>
-    </ul>
-    <p><a href="employee.php?emp_no=<?= urlencode($emp_no) ?>">Retour</a></p>
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h1 class="h2">Salaires de <?= htmlspecialchars($employe['first_name'] . ' ' . $employe['last_name']) ?></h1>
+            <p class="text-muted">Historique des salaires enregistrés.</p>
+        </div>
+        <a href="employee.php?emp_no=<?= urlencode($emp_no) ?>" class="btn btn-secondary">Retour</a>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-striped table-hover align-middle">
+            <thead class="table-light">
+                <tr>
+                    <th>Salaire</th>
+                    <th>Début</th>
+                    <th>Fin</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($salaries as $s): ?>
+                    <tr>
+                        <td><?= htmlspecialchars($s['salary']) ?></td>
+                        <td><?= htmlspecialchars($s['from_date']) ?></td>
+                        <td><?= htmlspecialchars($s['to_date']) ?></td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
 <?php include __DIR__ . '/footer.php';
