@@ -16,5 +16,9 @@ include __DIR__ . '/header.php';
     <p>Date de naissance : <?= htmlspecialchars($employe['birth_date']) ?></p>
     <p>Genre : <?= htmlspecialchars($employe['gender']) ?></p>
     <p>Date d'embauche : <?= htmlspecialchars($employe['hire_date']) ?></p>
-    <p><a href="departments.php">Retour aux départements</a></p>
+    <p>
+        <a href="departments.php">Retour aux départements</a> |
+        <a href="salaries.php?emp_no=<?= urlencode($employe['emp_no']) ?>">Voir salaires</a> |
+        <a href="titles.php?emp_no=<?= urlencode($employe['emp_no']) ?>">Voir titres</a>
+    </p>
 <?php include __DIR__ . '/footer.php';
