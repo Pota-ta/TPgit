@@ -1,0 +1,1 @@
+//connexion simple à la base de données
