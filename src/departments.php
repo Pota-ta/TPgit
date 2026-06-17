@@ -7,10 +7,12 @@ include __DIR__ . '/header.php';
     <h1>Liste des départements</h1>
     <ul>
         <?php foreach ($departments as $dept): ?>
-            <?php $manager = getCurrentManagerByDepartment($dept['dept_no']); ?>
+            <?php $manager = getCurrentManagerByDepartment($dept['dept_no']);
+                  $count = getEmployeeCountByDept($dept['dept_no']); ?>
             <li>
                 <?= $dept['dept_no'] ?> - <?= $dept['dept_name'] ?>
                 (manager: <?= $manager ? $manager['first_name'] . ' ' . $manager['last_name'] : 'N/A' ?>)
+                - <strong><?= $count ?></strong> employés
                 <a href="employees.php?dept_no=<?= urlencode($dept['dept_no']) ?>">Voir</a>
             </li>
         <?php endforeach; ?>
