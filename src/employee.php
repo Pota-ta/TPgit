@@ -16,6 +16,10 @@ include __DIR__ . '/header.php';
     <p>Date de naissance : <?= htmlspecialchars($employe['birth_date']) ?></p>
     <p>Genre : <?= htmlspecialchars($employe['gender']) ?></p>
     <p>Date d'embauche : <?= htmlspecialchars($employe['hire_date']) ?></p>
+    <?php $longest = getLongestTitleByEmployee($emp_no); ?>
+    <?php if ($longest): ?>
+        <p>Emploi le plus long : <strong><?= htmlspecialchars($longest['title']) ?></strong> (<?= intval($longest['days']) ?> jours)</p>
+    <?php endif; ?>
     <p>
         <a href="departments.php">Retour aux départements</a> |
         <a href="salaries.php?emp_no=<?= urlencode($employe['emp_no']) ?>">Voir salaires</a> |
