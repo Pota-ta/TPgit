@@ -25,4 +25,8 @@ include __DIR__ . '/header.php';
         <a href="salaries.php?emp_no=<?= urlencode($employe['emp_no']) ?>">Voir salaires</a> |
         <a href="titles.php?emp_no=<?= urlencode($employe['emp_no']) ?>">Voir titres</a>
     </p>
+    <p>
+        <a href="change_dept.php?emp_no=<?= urlencode($employe['emp_no']) ?>">Changer de département</a> |
+        <a href="promote_manager.php?emp_no=<?= urlencode($employe['emp_no']) ?>">Devenir Manager</a>
+    </p>
 <?php include __DIR__ . '/footer.php';
